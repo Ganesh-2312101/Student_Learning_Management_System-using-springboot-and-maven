@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student Management System - Admin</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: #eef2ff;
+            --secondary: #6c757d;
+            --success: #10b981;
+            --danger: #ef4444;
+            --white: #ffffff;
+            --light: #f9fafb;
+            --border: #e5e7eb;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --transition: all 0.2s ease;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text-primary);
+            display: flex;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 220px;
+            background-color: var(--white);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .logo-container {
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            height: 60px;
+        }
+
+        .logo-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 12px 0;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            margin: 2px 8px;
+            border-radius: 6px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: var(--transition);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            outline: none;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 220px;
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .header {
+            height: 60px;
+            background-color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Content area */
+        .content-container {
+            padding: 24px;
+            flex: 1;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            margin-top: 24px;
+        }
+
+        .page-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            background-color: var(--primary);
+            color: var(--white);
+            user-select: none;
+        }
+
+        .btn:hover,
+        .btn:focus {
+            background-color: #3a56d4;
+            outline: none;
+        }
+
+        .message {
+            margin-top: 16px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 60px;
+            }
+
+            .logo-text,
+            .nav-text {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 60px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header {
+                padding: 0 16px;
+            }
+
+            .content-container {
+                padding: 16px;
+                max-width: 100%;
+            }
+        }
+
+        /* Mobile fit for max height 600px and width 350px */
+        @media (max-width: 350px) and (max-height: 600px) {
+            body {
+                font-size: 14px;
+            }
+            .sidebar {
+                width: 60px;
+            }
+            .main-content {
+                margin-left: 60px;
+                padding: 16px;
+            }
+            .content-container {
+                padding: 16px;
+                margin-top: 16px;
+            }
+            .btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar" role="navigation" aria-label="Admin sidebar navigation">
+        <div class="logo-container">
+            <div class="logo-text" tabindex="0">Admin</div>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="/admin/adminPanel" class="nav-link" tabindex="0">Dashboard</a></li>
+            <li class="nav-item"><a href="/admin/courses" class="nav-link" tabindex="0">Courses</a></li>
+            <li class="nav-item"><a href="/admin/students" class="nav-link" tabindex="0">Students</a></li>
+            <li class="nav-item"><a href="/admin/teachers" class="nav-link" tabindex="0">Teachers</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" tabindex="0">Calendar</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" tabindex="0">Announcements</a></li>
+            <li class="nav-item"><a href="/admin/adminInfo" class="nav-link" tabindex="0">Info</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content" role="main">
+        <header class="header">
+            <div class="header-title" tabindex="0">Student Management System</div>
+        </header>
+        <section class="content-container" aria-label="Add student to course">
+            <h1 class="page-title">Add Student to the Course</h1>
+            <button class="btn" type="button" disabled aria-disabled="true">Add</button>
+            <div class="message" aria-live="polite">There is no student available to add.</div>
+        </section>
+    </main>
+</body>
+</html>
+
